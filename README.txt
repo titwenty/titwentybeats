@@ -1,31 +1,22 @@
-# titwenty-Beats — Cloudflare
+titwenty-Beats — Cloudflare Workers + R2
 
-Это не просто статический HTML. Проект использует:
-- Cloudflare Workers — сайт + API
-- Cloudflare R2 — постоянное хранение MP3/WAV
-- Workers Static Assets — фронтенд
+ВАЖНО:
+1. Содержимое ЭТОЙ папки должно находиться в корне GitHub-репозитория.
+2. В корне должны быть:
+   src/index.js
+   public/index.html
+   wrangler.jsonc
+   package.json
 
-## Самый простой запуск на Windows
+3. В Cloudflare должен существовать R2 bucket:
+   titwenty-beats
 
-1. Установи Node.js LTS.
-2. Распакуй ZIP.
-3. Запусти `SETUP.bat`.
-4. Авторизуй Cloudflare в открывшемся окне.
-5. Введи пароль админки.
-6. Скрипт создаст R2 bucket и задеплоит Worker.
-7. Открой URL, который напечатает Wrangler.
+4. Создай Worker Secret:
+   ADMIN_PASSWORD
 
-После этого:
-- `/` — публичный каталог для артистов
-- кнопка `Admin` — твоя админка
-- загруженный бит сохраняется в R2 и не пропадает после перезагрузки
-- артист может слушать его с другого телефона/ПК
-- пароль админки не хранится в коде сайта
+5. Deploy command:
+   npx wrangler deploy
 
-## Если bucket `titwenty-beats` уже существует
-
-Это нормально: SETUP.bat продолжит установку.
-
-## Важно
-
-Cloudflare account и авторизация обязательны. Полностью "просто перетащить ZIP в Pages и получить постоянные загрузки" невозможно без облачного хранилища; поэтому здесь R2 настраивается автоматически через Wrangler.
+Если Cloudflare показывает:
+"The entry-point file at src/index.js was not found"
+— значит файлы проекта загружены во вложенную папку, а не в корень репозитория.
