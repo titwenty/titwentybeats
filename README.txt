@@ -1,22 +1,32 @@
 titwenty-Beats — Cloudflare Workers + R2
 
+СТРУКТУРА:
+index.js
+wrangler.jsonc
+package.json
+public/index.html
+
+КАК ДЕПЛОИТЬ ЧЕРЕЗ CLOUDFLARE WORKERS BUILDS:
+Build command:
+  npm install
+
+Deploy command:
+  npx wrangler deploy
+
 ВАЖНО:
-1. Содержимое ЭТОЙ папки должно находиться в корне GitHub-репозитория.
-2. В корне должны быть:
-   src/index.js
-   public/index.html
-   wrangler.jsonc
-   package.json
-
-3. В Cloudflare должен существовать R2 bucket:
+1. GitHub должен содержать ФАЙЛЫ ПРОЕКТА В КОРНЕ.
+2. index.js должен быть именно:
+   /index.js
+   НЕ /src/index.js и НЕ /titwenty-Beats/index.js
+3. Создай R2 bucket с именем:
    titwenty-beats
-
-4. Создай Worker Secret:
+4. В Worker Secrets создай:
    ADMIN_PASSWORD
+5. После деплоя сайт открывается на адресе Worker.
 
-5. Deploy command:
-   npx wrangler deploy
-
-Если Cloudflare показывает:
-"The entry-point file at src/index.js was not found"
-— значит файлы проекта загружены во вложенную папку, а не в корень репозитория.
+В конфиге уже исправлено:
+- main -> ./index.js
+- assets -> ./public
+- binding ASSETS
+- API и /media направляются сначала в Worker
+- R2 binding BEATS
