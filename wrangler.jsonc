@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "titwenty-beats",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-02",
+  "assets": {
+    "directory": "./public"
+  },
+  "r2_buckets": [
+    {
+      "binding": "BEATS",
+      "bucket_name": "titwenty-beats"
+    }
+  ]
+}
